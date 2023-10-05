@@ -19,6 +19,12 @@ export class TaxCalculatorService {
     pl: { name: 'Poland', vat: 23 },
   });
 
+  /**
+   * Expectation 1: It throws error if country isn't supported
+   * Expectation 2: It throws error if the price less then 0
+   * Expectation 3: Always returns 0 if isB2B flag set to true
+   * Expectation 4: Calculates VAT amount based on country
+   */
   calculateVAT(price: number, countryKey: string, isB2B = false) {
     if (!this.countries[countryKey]) {
       throw new Error(`This country isn't supported...`);
