@@ -1,11 +1,20 @@
-import { Country as Countries, TaxCalculatorService } from "./tax-calculator.service"
+import { COUNTRIES, TaxCalculatorService } from "./tax-calculator.service"
+import { TestBed } from '@angular/core/testing';
 
 describe(`TaxCalculatorService`, () => {
   let service: TaxCalculatorService;
-  let testCountries: Countries;
   beforeEach(() => {
-    testCountries = { ua: { name: 'Ukraine', vat: 20 } }
-    service = new TaxCalculatorService(testCountries);
+    TestBed.configureTestingModule({
+      providers: [
+        { 
+          provide: COUNTRIES,
+          useValue: { ua: { name: 'Ukraine', vat: 20 } }
+        }
+      ]
+    })
+    TestBed.runInInjectionContext(() => {
+      service = new TaxCalculatorService();
+    })
   })
   it(`should return 0 if isB2B flag is true`, () => {
     const result = service.calculateVAT(100, 'ua', true);
