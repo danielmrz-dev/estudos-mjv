@@ -12,9 +12,7 @@ describe(`TaxCalculatorService`, () => {
         }
       ]
     })
-    TestBed.runInInjectionContext(() => {
-      service = new TaxCalculatorService();
-    })
+    service = TestBed.inject(TaxCalculatorService);
   })
   it(`should return 0 if isB2B flag is true`, () => {
     const result = service.calculateVAT(100, 'ua', true);
