@@ -2,17 +2,46 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ButtonComponent } from "./button.component";
 import { ButtonModule } from "./button.module";
 import { DebugElement } from "@angular/core";
+import { By } from "@angular/platform-browser";
 
 describe('ButtonComponent', () => {
   let fixture: ComponentFixture<ButtonComponent>;
-  let el: DebugElement;
+  let debugEl: DebugElement;
+  let el: HTMLElement;
   beforeEach(() => {
     TestBed.configureTestingModule({imports: [ButtonModule]})
     fixture = TestBed.createComponent(ButtonComponent);
-    el = fixture.debugElement;
+    debugEl = fixture.debugElement;
+    el = debugEl.nativeElement;
     fixture.detectChanges(); // initial CD. triggers ngOnInit
   });
-  it('should test something...', () => {
-    expect(true).toBe(true);
+  describe('Appearance state', () => {
+    it('should have "solid" appearance by default', () => {
+      // expect(el.classes['solid-button']).toBe(true);
+      // expect(el.nativeElement.classList.contains('solid-button')).toBe(true);
+      expect(el.classList).toContain('solid-button');
+    })
+    it('should apply proper CSS classes when appearance changes', () => {
+      debugEl.componentInstance.appearance = 'stroked';
+      fixture.detectChanges();
+      expect(el.classList).toContain('stroked-button');
+  
+      debugEl.componentInstance.appearance = 'solid';
+      fixture.detectChanges();
+      expect(el.classList).toContain('solid-button');
+    })
+  })
+  describe('Loading state', () => {
+    it('should show loader icon in "loading" state', () => {
+      debugEl.componentInstance.loading = true;
+      fixture.detectChanges();
+      let loader = debugEl.query(By.css('.loader'));
+      expect(loader).not.toBeNull();
+  
+      debugEl.componentInstance.loading = false;
+      fixture.detectChanges();
+      loader = debugEl.query(By.css('.loader'));
+      expect(loader).toBeNull();
+    })
   })
 })
