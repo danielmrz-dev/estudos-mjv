@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ButtonComponent } from "./button.component";
+import { ButtonComponent, BUTTON_CLASSES } from "./button.component";
 import { ButtonModule } from "./button.module";
 import { DebugElement } from "@angular/core";
 import { By } from "@angular/platform-browser";
@@ -8,37 +8,39 @@ describe('ButtonComponent', () => {
   let fixture: ComponentFixture<ButtonComponent>;
   let debugEl: DebugElement;
   let el: HTMLElement;
+  let component: ButtonComponent;
   beforeEach(() => {
     TestBed.configureTestingModule({imports: [ButtonModule]})
     fixture = TestBed.createComponent(ButtonComponent);
     debugEl = fixture.debugElement;
     el = debugEl.nativeElement;
+    component = fixture.componentInstance;
     fixture.detectChanges(); // initial CD. triggers ngOnInit
   });
   describe('Appearance state', () => {
     it('should have "solid" appearance by default', () => {
       // expect(el.classes['solid-button']).toBe(true);
       // expect(el.nativeElement.classList.contains('solid-button')).toBe(true);
-      expect(el.classList).toContain('solid-button');
+      expect(el.classList).toContain(BUTTON_CLASSES.solid);
     })
     it('should apply proper CSS classes when appearance changes', () => {
-      debugEl.componentInstance.appearance = 'stroked';
+      component.appearance = 'stroked';
       fixture.detectChanges();
-      expect(el.classList).toContain('stroked-button');
+      expect(el.classList).toContain(BUTTON_CLASSES.stroked);
   
-      debugEl.componentInstance.appearance = 'solid';
+      component.appearance = 'solid';
       fixture.detectChanges();
-      expect(el.classList).toContain('solid-button');
+      expect(el.classList).toContain(BUTTON_CLASSES.solid);
     })
   })
   describe('Loading state', () => {
     it('should show loader icon in "loading" state', () => {
-      debugEl.componentInstance.loading = true;
+      component.loading = true;
       fixture.detectChanges();
       let loader = debugEl.query(By.css('[data-testingId="loader"]'));
       expect(loader).not.toBeNull();
   
-      debugEl.componentInstance.loading = false;
+      component.loading = false;
       fixture.detectChanges();
       loader = debugEl.query(By.css('[data-testingId="loader"]'));
       expect(loader).toBeNull();
