@@ -46,4 +46,13 @@ describe('ButtonComponent', () => {
       expect(loader).toBeNull();
     })
   })
+  describe('Disabled state', () => {
+    it('should apply nessesary attributes to component host', () => {
+      fixture.componentRef.setInput('disabled', true);
+      fixture.detectChanges();
+      expect(el.classList).toContain('disabled');
+      expect(el.getAttribute('disabled')).not.toBeNull();
+      expect(el.getAttribute('tabindex')).toBe('-1');
+    })
+  })
 })
