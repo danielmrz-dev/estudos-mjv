@@ -47,12 +47,21 @@ describe('ButtonComponent', () => {
     })
   })
   describe('Disabled state', () => {
-    it('should apply nessesary attributes to component host', () => {
+    beforeEach(() => {
       fixture.componentRef.setInput('disabled', true);
       fixture.detectChanges();
+    })
+    it('should apply nessesary attributes to component host', () => {
       expect(el.classList).toContain('disabled');
       expect(el.getAttribute('disabled')).not.toBeNull();
       expect(el.getAttribute('tabindex')).toBe('-1');
+    })
+    it('should prevent default behavior', () => {
+      const clickEvent = new PointerEvent('click', {
+        cancelable: true
+      })
+      debugEl.triggerEventHandler('click', clickEvent);
+      expect(clickEvent.defaultPrevented).toBe(true);
     })
   })
 })
