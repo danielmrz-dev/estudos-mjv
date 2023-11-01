@@ -23,14 +23,31 @@ describe('ChipComponent', () => {
 
     expect(expectedValue).toBe(fixture.componentInstance)
   })
+  it('should emit event if remove icon is clicked (Test Host)', () => {
+    const { fixture, chipDebugEl } = setup();
+    fixture.componentInstance.removable = true;
+    fixture.detectChanges();
+
+    const removeIconDebugEl = chipDebugEl.query(By.css('[data-testingId="remove"]'));
+    removeIconDebugEl.triggerEventHandler('click');
+    
+    expect(fixture.componentInstance.removedItem)
+      .toBe(chipDebugEl.componentInstance)
+  })
 })
 function setup() {
   @Component({
     standalone: true,
     imports: [ChipComponent],
-    template: `<df-chip>Angular</df-chip>`
+    template: `
+      <df-chip
+        (removed)="removedItem = $event"
+        [removable]="removable">Angular</df-chip>`
   })
-  class ChipTestHost {}
+  class ChipTestHost {
+    removedItem!: ChipComponent<unknown>;
+    removable = false;
+  }
 
   let fixture = TestBed.createComponent(ChipTestHost);
   let chipDebugEl = fixture.debugElement.query(By.directive(ChipComponent));
