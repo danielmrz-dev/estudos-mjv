@@ -9,6 +9,20 @@ describe('ChipComponent', () => {
     const chipTextEl = chipDebugEl.query(By.css('[data-testingId="chip-text"]')).nativeElement;
     expect(chipTextEl.innerText).toBe('Angular');
   })
+  it('should emit event if remove icon is clicked', () => {
+    let expectedValue: any;
+    const fixture = TestBed.createComponent(ChipComponent);
+    fixture.componentRef.setInput('removable', true);
+    fixture.componentInstance.removed.subscribe(
+      chip => expectedValue = chip
+    );
+    fixture.detectChanges();
+
+    const removeIcon = fixture.debugElement.query(By.css('[data-testingId="remove"]'));
+    removeIcon.triggerEventHandler('click');
+
+    expect(expectedValue).toBe(fixture.componentInstance)
+  })
 })
 function setup() {
   @Component({
