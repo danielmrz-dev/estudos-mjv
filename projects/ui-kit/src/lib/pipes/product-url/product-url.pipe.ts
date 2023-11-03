@@ -1,12 +1,20 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { InjectionToken, Pipe, PipeTransform, inject } from '@angular/core';
 import { toNumberProperty } from '../../utils/type-coercion';
+
+export const PRODUCT_URL = new InjectionToken<string | null>('Product Url', {
+  providedIn: 'root',
+  factory: () => {
+    console.warn(`Don't forget to provide your URL for PRODUCT_URL token`)
+    return null;
+  }
+})
 
 @Pipe({
   name: 'productUrl',
   standalone: true,
 })
 export class ProductUrlPipe implements PipeTransform {
-  private baseUrl: string = 'https://test.com';
+  private baseUrl = inject(PRODUCT_URL);
 
   transform(productId: string | number): string {
     const id = toNumberProperty(productId);
