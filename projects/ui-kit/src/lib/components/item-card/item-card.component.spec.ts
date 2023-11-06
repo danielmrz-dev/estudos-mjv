@@ -1,17 +1,25 @@
 import { TestBed } from "@angular/core/testing"
 import { ItemCardComponent } from "./item-card.component"
-import { ItemCardModule } from "./item-card.module";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { By } from "@angular/platform-browser";
+import { ButtonComponent } from "../button/button.component";
 
 describe('ItemCardComponent', () => {
   it('...', () => {
     const {fixture} = setup();
+    console.log(
+      'card button',
+      fixture.debugElement.query(By.directive(ButtonComponent))
+    );
     
+    debugger;
   })
 })
 
 function setup() {
   TestBed.configureTestingModule({
-    imports: [ItemCardModule]
+    declarations: [ItemCardComponent, ButtonComponent],
+    schemas: [NO_ERRORS_SCHEMA]
   });
   const fixture = TestBed.createComponent(ItemCardComponent);
   fixture.componentInstance.item = {
