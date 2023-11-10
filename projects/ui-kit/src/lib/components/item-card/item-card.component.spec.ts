@@ -1,8 +1,9 @@
 import { TestBed } from "@angular/core/testing"
 import { ItemCardComponent } from "./item-card.component"
-import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { Component, Input, NO_ERRORS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 import { ButtonComponent } from "../button/button.component";
+import { ChipComponent } from "../chip/chip.component";
 
 describe('ItemCardComponent', () => {
   it('...', () => {
@@ -17,9 +18,20 @@ describe('ItemCardComponent', () => {
 })
 
 function setup() {
+  @Component({
+    selector: 'df-chip',
+    template: `
+      <span data-testingId="chip-text" class="chip-text">
+        <ng-content></ng-content>
+      </span>
+    `
+  })
+  class ChipComponentStub implements Partial<ChipComponent<unknown>> {
+    @Input() value?: unknown;
+  }
+  
   TestBed.configureTestingModule({
-    declarations: [ItemCardComponent, ButtonComponent],
-    schemas: [NO_ERRORS_SCHEMA]
+    declarations: [ItemCardComponent, ChipComponentStub, ButtonComponent],
   });
   const fixture = TestBed.createComponent(ItemCardComponent);
   fixture.componentInstance.item = {
