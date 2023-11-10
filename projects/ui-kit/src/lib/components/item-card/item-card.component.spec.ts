@@ -9,8 +9,8 @@ describe('ItemCardComponent', () => {
   it('...', () => {
     const {fixture} = setup();
     console.log(
-      'card button',
-      fixture.debugElement.query(By.directive(ButtonComponent))
+      'chips: ',
+      fixture.debugElement.queryAll(By.directive(ChipComponent))
     );
     
     debugger;
@@ -24,7 +24,13 @@ function setup() {
       <span data-testingId="chip-text" class="chip-text">
         <ng-content></ng-content>
       </span>
-    `
+    `,
+    providers: [
+      {
+        provide: ChipComponent,
+        useExisting: ChipComponentStub
+      }
+    ]
   })
   class ChipComponentStub implements Partial<ChipComponent<unknown>> {
     @Input() value?: unknown;
