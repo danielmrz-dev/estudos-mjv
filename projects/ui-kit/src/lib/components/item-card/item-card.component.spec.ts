@@ -6,14 +6,18 @@ import { ButtonComponent } from "../button/button.component";
 import { ChipComponent } from "../chip/chip.component";
 
 describe('ItemCardComponent', () => {
-  it('...', () => {
-    const {fixture} = setup();
-    console.log(
-      'chips: ',
-      fixture.debugElement.queryAll(By.directive(ChipComponent))
-    );
+  it('should properly render chips', () => {
+    const {fixture, getChips} = setup();
+    const testData = ['Item 1', 'Item 2'];
+    fixture.componentRef.setInput('tags', testData);
+    fixture.detectChanges();
+    let chip = getChips();
+    expect(chip.length).toBe(testData.length);
     
-    debugger;
+    fixture.componentRef.setInput('tags', ['Item 3']);
+    fixture.detectChanges();
+    chip = getChips();
+    expect(chip.length).toBe(1);
   })
 })
 
@@ -40,6 +44,8 @@ function setup() {
     declarations: [ItemCardComponent, ChipComponentStub, ButtonComponent],
   });
   const fixture = TestBed.createComponent(ItemCardComponent);
+  const getChips = () =>
+    fixture.debugElement.queryAll(By.directive(ChipComponent));
   fixture.componentInstance.item = {
     id: 0,
     name: 'Angular Testing Course',
@@ -48,5 +54,5 @@ function setup() {
   }
   fixture.componentInstance.tags = ['Angular Testing'];
   fixture.detectChanges();
-  return { fixture }
+  return { fixture, getChips }
 }
