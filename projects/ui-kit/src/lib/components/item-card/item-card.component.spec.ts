@@ -40,9 +40,6 @@ function setup() {
     @Input() value?: unknown;
   }
   
-  TestBed.configureTestingModule({
-    declarations: [ItemCardComponent, ChipComponentStub, ButtonComponent],
-  });
   const fixture = TestBed.createComponent(ItemCardComponent);
   const getChips = () =>
     fixture.debugElement.queryAll(By.directive(ChipComponent));

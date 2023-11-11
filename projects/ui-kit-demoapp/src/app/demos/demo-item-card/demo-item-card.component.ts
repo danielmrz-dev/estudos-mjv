@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemCardModule } from 'ui-kit';
+import { ItemCardComponent } from 'ui-kit';
 
 @Component({
   template: `<df-item-card [tags]="tags" [item]="product" />`,
   standalone: true,
-  imports: [ItemCardModule],
+  imports: [ItemCardComponent],
 })
 export class DemoItemCardComponent implements OnInit {
   product = {

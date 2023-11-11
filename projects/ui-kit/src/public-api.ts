@@ -14,4 +14,3 @@ export * from './lib/pipes/product-url/product-url.pipe';
 export * from './lib/utils/type-coercion';
 export * from './lib/directives/hide-after/hide-after.directive';
 export * from './lib/components/item-card/item-card.component';
-export * from './lib/components/item-card/item-card.module';

@@ -6,9 +6,19 @@ import {
   Output,
 } from '@angular/core';
 import { Item } from '../../models/item';
+import { ButtonModule } from '../button/button.module';
+import { ChipComponent } from '../chip/chip.component';
+import { CurrencyPipe, NgFor } from '@angular/common';
 
 @Component({
   selector: 'df-item-card',
+  standalone: true,
+  imports: [
+    ButtonModule,
+    ChipComponent,
+    CurrencyPipe,
+    NgFor
+  ],
   templateUrl: './item-card.component.html',
   styleUrls: ['./item-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
