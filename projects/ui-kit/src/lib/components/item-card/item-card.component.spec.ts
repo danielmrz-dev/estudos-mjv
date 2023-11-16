@@ -24,6 +24,7 @@ describe('ItemCardComponent', () => {
 function setup() {
   @Component({
     selector: 'df-chip',
+    standalone: true,
     template: `
       <span data-testingId="chip-text" class="chip-text">
         <ng-content></ng-content>
@@ -39,7 +40,11 @@ function setup() {
   class ChipComponentStub implements Partial<ChipComponent<unknown>> {
     @Input() value?: unknown;
   }
-  
+  TestBed.overrideComponent(ItemCardComponent, {
+    remove: { imports: [ChipComponent] },
+    add: { imports: [ChipComponentStub] }
+  });
+
   const fixture = TestBed.createComponent(ItemCardComponent);
   const getChips = () =>
     fixture.debugElement.queryAll(By.directive(ChipComponent));
