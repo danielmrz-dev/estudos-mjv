@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { LoggerService } from './logger.service';
 
 type TipoOperacao = "soma" | "subtracao" | "multiplicacao" | "divisao";
 
@@ -7,7 +8,9 @@ type TipoOperacao = "soma" | "subtracao" | "multiplicacao" | "divisao";
 })
 export class CalculadoraService {
 
-  calcula(n1: number, n2: number, operacao: TipoOperacao) {
+  private readonly logger = inject(LoggerService);
+
+  calcula(n1: number, n2: number, operacao: any) {
     switch (operacao) {
       case 'soma':
         return n1 + n2;
@@ -17,6 +20,9 @@ export class CalculadoraService {
         return n1 * n2;
       case 'divisao':
         return n1 / n2;
+      default:
+        this.logger.log("Tipo de operação inválido.")
+        return null;
     }
   }
 }
