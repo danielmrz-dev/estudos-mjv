@@ -2,10 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { UniqueIdService } from '../../services/unique-id.service';
+import { ActionDirective } from '../../directives/action.directive';
 
 @Component({
   selector: 'app-like-widget',
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, ActionDirective],
   templateUrl: './like-widget.component.html',
   styleUrl: './like-widget.component.scss'
 })
