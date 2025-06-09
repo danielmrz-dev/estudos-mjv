@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { LikeWidgetComponent } from "./shared/components/like-widget/like-widget.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [LikeWidgetComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'alura-curso-1';
+  likes: number = 0;
+
+  like() {
+    this.likes++;
+  }
 }
