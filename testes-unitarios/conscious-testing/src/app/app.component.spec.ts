@@ -26,7 +26,7 @@ describe('AppComponent', () => {
   
   it('Testing the use of jasmine.clock function', () => {
     setTimeout(() => {
-      expect(1).toBe(1);
+      expect(2).toBe(2);
     }, 2000);
     jasmine.clock().tick(2000);
   });
