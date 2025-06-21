@@ -44,7 +44,18 @@ describe('AppComponent', () => {
     jasmine.clock().tick(1000);
     expect(pollingTaskSpy).toHaveBeenCalledTimes(2);
   });
-  
 
+  it('Test', async () => {
+    // spyOn(window, 'fetch').and.returnValue(new Promise((resolve) => {
+    //   resolve(new Response(JSON.stringify([1,2,3])));
+    // }));
+    const fetch = spyOn(window, 'fetch').and.resolveTo(new Response(JSON.stringify([1,2,3])));
+    await window.fetch('https://localhost:4200');
+    await window.fetch('');
+    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fetch).toHaveBeenCalledWith('https://localhost:4200');
+    
+  });
+  
 
 });
