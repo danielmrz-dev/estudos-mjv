@@ -39,7 +39,7 @@ describe(`toBooleanProperty Function`, () => {
   
 })
 
-fdescribe(`toNumberProperty Function`, () => {
+describe(`toNumberProperty Function`, () => {
 
   it('should transform 100 into 100', () => {
     expect(toNumberProperty(100)).toBe(100);
