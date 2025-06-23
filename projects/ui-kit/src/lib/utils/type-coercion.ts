@@ -7,7 +7,7 @@
  * {} => false
  * ...
  */
-export function isNumber(value: any) {
+export function isNumber(value: any): boolean {
   return !isNaN(parseFloat(value)) && !isNaN(Number(value));
 }
 /**
