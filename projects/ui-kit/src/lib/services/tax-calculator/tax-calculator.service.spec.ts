@@ -1,7 +1,7 @@
 import { COUNTRIES, TaxCalculatorService } from "./tax-calculator.service"
 import { TestBed } from '@angular/core/testing';
 
-fdescribe(TaxCalculatorService.name, () => {
+describe(TaxCalculatorService.name, () => {
   let service: TaxCalculatorService;
 
   beforeEach(() => {
@@ -35,8 +35,5 @@ fdescribe(TaxCalculatorService.name, () => {
     const result = service.calculateVAT(20, 'ua');
     expect(result).toBe(4);
   });
-
-
-
 
 })

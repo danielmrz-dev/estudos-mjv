@@ -41,9 +41,11 @@ export class ButtonComponent {
   set loading(value: any) {
     this.#loading = toBooleanProperty(value);
   }
+
   get loading(): boolean {
     return this.#loading;
   }
+
   #loading = false;
 
   @HostBinding('class')
