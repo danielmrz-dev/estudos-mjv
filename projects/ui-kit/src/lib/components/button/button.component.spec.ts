@@ -110,7 +110,7 @@ function setup() {
     ]
   })
   let fixture = TestBed.createComponent(ButtonTestHost);
-  let debugEl = fixture.debugElement.query(By.directive(ButtonComponent));;
+  let debugEl = fixture.debugElement.query(By.directive(ButtonComponent));
   let element: HTMLElement = debugEl.nativeElement;
   let hostComponent = fixture.componentInstance;
   fixture.detectChanges();
