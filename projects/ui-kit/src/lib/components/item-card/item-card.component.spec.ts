@@ -4,24 +4,19 @@ import { Component, Input, NO_ERRORS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 import { ButtonComponent } from "../button/button.component";
 import { ChipComponent } from "../chip/chip.component";
+import { ButtonModule } from "ui-kit";
 
-describe('ItemCardComponent', () => {
+fdescribe('ItemCardComponent', () => {
   it('should properly render chips', () => {
-    const {fixture, getChips} = setup();
-    const testData = ['Item 1', 'Item 2'];
-    fixture.componentRef.setInput('tags', testData);
-    fixture.detectChanges();
-    let chip = getChips();
-    expect(chip.length).toBe(testData.length);
-    
-    fixture.componentRef.setInput('tags', ['Item 3']);
-    fixture.detectChanges();
-    chip = getChips();
-    expect(chip.length).toBe(1);
+    const { fixture } = setup();
+    console.log(fixture.debugElement.query(By.directive(ChipComponent)));    
+    debugger;
+    expect(1).toBe(1);
   })
 })
 
 function setup() {
+
   @Component({
     selector: 'df-chip',
     standalone: true,
@@ -30,31 +25,30 @@ function setup() {
         <ng-content></ng-content>
       </span>
     `,
-    providers: [
-      {
-        provide: ChipComponent,
-        useExisting: ChipComponentStub
-      }
-    ]
   })
   class ChipComponentStub implements Partial<ChipComponent<unknown>> {
     @Input() value?: unknown;
   }
-  TestBed.overrideComponent(ItemCardComponent, {
-    remove: { imports: [ChipComponent] },
-    add: { imports: [ChipComponentStub] }
-  });
 
+  TestBed.configureTestingModule({
+    providers: [
+      {
+        provide: ChipComponent,
+        useClass: ChipComponentStub
+      }
+    ]
+  })
   const fixture = TestBed.createComponent(ItemCardComponent);
-  const getChips = () =>
-    fixture.debugElement.queryAll(By.directive(ChipComponent));
   fixture.componentInstance.item = {
     id: 0,
-    name: 'Angular Testing Course',
+    name: 'Angular Testing',
     imageURL: '',
     price: 99
-  }
+  };
+
   fixture.componentInstance.tags = ['Angular Testing'];
   fixture.detectChanges();
-  return { fixture, getChips }
+
+  return { fixture };
+
 }

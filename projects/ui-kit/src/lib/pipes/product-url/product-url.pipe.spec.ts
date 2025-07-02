@@ -1,7 +1,7 @@
 import { TestBed } from "@angular/core/testing"
 import { PRODUCT_URL, ProductUrlPipe } from "./product-url.pipe"
 
-fdescribe('ProductUrlPipe', () => {
+describe('ProductUrlPipe', () => {
 
   it('should properly build the url', () => {
     const { pipe } = setup();

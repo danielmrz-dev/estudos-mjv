@@ -30,6 +30,7 @@ export class ItemCardComponent {
 
   @Output() purchased = new EventEmitter<Item>();
 
+
   onPurchase() {
     this.purchased.next(this.item);
   }
