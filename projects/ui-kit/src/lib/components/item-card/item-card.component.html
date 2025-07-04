@@ -4,7 +4,7 @@
     <img class="preview-img" [src]="item.imageURL" [alt]="item.name" />
   </div>
   <div class="tags">
-    <df-chip *ngFor="let tag of tags" [value]="tag">{{ tag }}</df-chip>
+    <df-chip data-testingId="tag" *ngFor="let tag of tags" [value]="tag">{{ tag }}</df-chip>
   </div>
 </div>
 <div class="footer">

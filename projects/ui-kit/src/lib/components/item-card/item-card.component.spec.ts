@@ -2,17 +2,26 @@ import { TestBed } from "@angular/core/testing"
 import { ItemCardComponent } from "./item-card.component"
 import { Component, Input, NO_ERRORS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
-import { ButtonComponent } from "../button/button.component";
 import { ChipComponent } from "../chip/chip.component";
-import { ButtonModule } from "ui-kit";
 
-fdescribe('ItemCardComponent', () => {
+describe('ItemCardComponent', () => {
   it('should properly render chips', () => {
     const { fixture } = setup();
-    console.log(fixture.debugElement.query(By.directive(ChipComponent)));    
-    debugger;
     expect(1).toBe(1);
   })
+
+  it('should render correctly', () => {
+    const { debugEl, fixture } = setup();
+    const tagsArray = ['Angular', 'Unit tests', 'Jasmine'];
+    fixture.componentRef.setInput('tags', tagsArray);
+    debugger
+    fixture.detectChanges();
+    const tags = debugEl.queryAll(By.css('[data-testingId="tag"]'));
+    expect(tags.length).toBe(3);
+  });
+
+
+  
 })
 
 function setup() {
@@ -30,15 +39,13 @@ function setup() {
     @Input() value?: unknown;
   }
 
-  TestBed.configureTestingModule({
-    providers: [
-      {
-        provide: ChipComponent,
-        useClass: ChipComponentStub
-      }
-    ]
+  TestBed.overrideComponent(ItemCardComponent, {
+    remove: { imports: [ChipComponent] },
+    add: { imports: [ChipComponentStub] }
   })
   const fixture = TestBed.createComponent(ItemCardComponent);
+  const component = fixture.componentInstance;
+  const debugEl = fixture.debugElement;
   fixture.componentInstance.item = {
     id: 0,
     name: 'Angular Testing',
@@ -49,6 +56,6 @@ function setup() {
   fixture.componentInstance.tags = ['Angular Testing'];
   fixture.detectChanges();
 
-  return { fixture };
+  return { fixture, component, debugEl };
 
 }
